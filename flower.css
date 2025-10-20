@@ -752,6 +752,44 @@ body::before {
   transform: translate(50%, -50%) scale(1) !important;
 }
 
+/* CSS cho ảnh bất ngờ dưới - bên trái (between envelope and top-left image on horizontal) */
+#gift-image-left-bottom {
+  position: fixed !important;
+  top: calc(50% - 90px) !important;
+  left: calc(30% + 10px) !important;
+  width: 180px !important;
+  height: 180px !important;
+  object-fit: cover !important;
+  border-radius: 15px !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5) !important;
+  z-index: 9999 !important;
+  transform: translate(-50%, -50%) scale(0) !important;
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+}
+
+#gift-image-right-bottom {
+  position: fixed !important;
+  top: calc(50% - 90px) !important;
+  right: calc(30% - 10px) !important;
+  width: 180px !important;
+  height: 180px !important;
+  object-fit: cover !important;
+  border-radius: 15px !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5) !important;
+  z-index: 9999 !important;
+  transform: translate(50%, -50%) scale(0) !important;
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+}
+
+/* Class để kích hoạt hiệu ứng phóng to cho ảnh dưới */
+#gift-image-left-bottom.show {
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+#gift-image-right-bottom.show {
+  transform: translate(50%, -50%) scale(1) !important;
+}
+
 /* CSS responsive cho mobile landscape */
 @media screen and (max-height: 500px) and (orientation: landscape) {
   #gift-image-left {
@@ -760,9 +798,23 @@ body::before {
     width: 120px !important;
     height: 120px !important;
   }
-  
+
   #gift-image-right {
     top: 25% !important;
+    right: 15% !important;
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  #gift-image-left-bottom {
+    bottom: 25% !important;
+    left: 15% !important;
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  #gift-image-right-bottom {
+    bottom: 25% !important;
     right: 15% !important;
     width: 120px !important;
     height: 120px !important;
@@ -777,12 +829,36 @@ body::before {
     width: 140px !important;
     height: 140px !important;
   }
-  
+
   #gift-image-right {
     top: 30% !important;
     right: 15% !important;
     width: 140px !important;
     height: 140px !important;
+  }
+
+  #gift-image-left-bottom {
+    top: 60% !important;
+    left: 50% !important;
+    transform: translate(-50%, calc(-50% - 80px)) scale(0) !important;
+    width: 140px !important;
+    height: 140px !important;
+  }
+
+  #gift-image-left-bottom.show {
+    transform: translate(-50%, calc(-50% - 80px)) scale(1) !important;
+  }
+
+  #gift-image-right-bottom {
+    top: 60% !important;
+    left: 50% !important;
+    transform: translate(-50%, calc(-50% + 80px)) scale(0) !important;
+    width: 140px !important;
+    height: 140px !important;
+  }
+
+  #gift-image-right-bottom.show {
+    transform: translate(-50%, calc(-50% + 80px)) scale(1) !important;
   }
 }
 
@@ -968,6 +1044,16 @@ body::before {
 .gift-right {
   right: 10%;
   top: 20%;
+}
+
+.gift-bottom-left {
+  left: 30%;
+  top: 50%;
+}
+
+.gift-bottom-right {
+  right: 30%;
+  top: 50%;
 }
 
 .box {
@@ -1212,6 +1298,16 @@ body::before {
   .gift-right {
     right: 5%;
     top: 15%;
+  }
+
+  .gift-bottom-left {
+    left: 50%;
+    top: calc(60% - 80px);
+  }
+
+  .gift-bottom-right {
+    left: 50%;
+    top: calc(60% + 80px);
   }
   
 @keyframes slideUp {

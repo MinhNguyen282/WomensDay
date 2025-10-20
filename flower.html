@@ -106,11 +106,39 @@
       </div>
     </div>
 
+    <!-- Hộp quà dưới bên trái -->
+    <div class="gift-box gift-bottom-left">
+      <div class="box">
+        <div class="box-body">
+          <div class="box-lid">
+            <div class="box-bowtie"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hộp quà dưới bên phải -->
+    <div class="gift-box gift-bottom-right">
+      <div class="box">
+        <div class="box-body">
+          <div class="box-lid">
+            <div class="box-bowtie"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Ảnh bất ngờ bên trái -->
     <img id="gift-image-left" src="assets/anh1.jpeg" alt="Ảnh bất ngờ 1" style="display: none;">
 
     <!-- Ảnh bất ngờ bên phải -->
     <img id="gift-image-right" src="assets/anh2.jpg" alt="Ảnh bất ngờ 2" style="display: none;">
+
+    <!-- Ảnh bất ngờ bên trái dưới -->
+    <img id="gift-image-left-bottom" src="assets/anh3.jpg" alt="Ảnh bất ngờ 3" style="display: none;">
+
+    <!-- Ảnh bất ngờ bên phải dưới -->
+    <img id="gift-image-right-bottom" src="assets/anh4.jpg" alt="Ảnh bất ngờ 4" style="display: none;">
 
     <!-- Heart bloom effects -->
     <div class="heart-bloom heart-bloom-left" style="display: none;">❤️</div>
@@ -1564,20 +1592,28 @@
           setTimeout(function() {
             $('.gift-left').addClass('impacted');
             $('.gift-right').addClass('impacted');
+            $('.gift-bottom-left').addClass('impacted');
+            $('.gift-bottom-right').addClass('impacted');
           }, 7200); // 6s (delay) + 1.2s (animation) = 7.2s
-          
+
           // Mở nắp hộp quà và hiển thị ảnh sau khi chạm đất
           setTimeout(function() {
             $('.gift-left .box-lid').addClass('lid-open');
             $('.gift-right .box-lid').addClass('lid-open');
+            $('.gift-bottom-left .box-lid').addClass('lid-open');
+            $('.gift-bottom-right .box-lid').addClass('lid-open');
             $('#gift-image-left').show().addClass('show');
             $('#gift-image-right').show().addClass('show');
+            $('#gift-image-left-bottom').show().addClass('show');
+            $('#gift-image-right-bottom').show().addClass('show');
           }, 7500); // 7.2s + 0.3s = 7.5s
-          
+
           // Làm hộp quà biến mất sau khi hiển thị ảnh
           setTimeout(function() {
             $('.gift-left').addClass('disappearing');
             $('.gift-right').addClass('disappearing');
+            $('.gift-bottom-left').addClass('disappearing');
+            $('.gift-bottom-right').addClass('disappearing');
           }, 8500); // 7.5s + 1s (hiển thị ảnh) = 8.5s
 
           envelope.on('click', function () {
