@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="flower.css">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
     <link rel="icon" href="img/flowers.png" type="image/x-icon">
-    <title>flowers</title>
+    <title>Gửi Lan Anh xinh đẹp</title>
 </head>
 <body class="container">
     <!-- Background Music -->
@@ -111,6 +111,11 @@
 
     <!-- Ảnh bất ngờ bên phải -->
     <img id="gift-image-right" src="assets/anh2.jpg" alt="Ảnh bất ngờ 2" style="display: none;">
+
+    <!-- Heart bloom effects -->
+    <div class="heart-bloom heart-bloom-left" style="display: none;">❤️</div>
+    <div class="heart-bloom heart-bloom-right" style="display: none;">❤️</div>
+    <div class="heart-bloom heart-bloom-center" style="display: none;">❤️</div>
 
     <div class="flowers">
       <div class="flower flower--1">
@@ -1553,6 +1558,7 @@
           let currentPage = 1;
           const totalPages = 8;
           let isOpen = false;
+          let isAnimating = false; // Prevent animation from triggering multiple times
 
           // Tự động kích hoạt hiệu ứng nổ hộp quà sau khi hạ cánh
           setTimeout(function() {
@@ -1605,6 +1611,51 @@
           function updateActivePage() {
               $(".lyric-page").removeClass("active");
               $("#page" + currentPage).addClass("active");
+
+              // Trigger heart bloom animation on last page (only if not already animating)
+              if (currentPage === totalPages && !isAnimating) {
+                  triggerHeartBloomSequence();
+              }
+          }
+
+          // Heart bloom animation sequence
+          function triggerHeartBloomSequence() {
+              isAnimating = true; // Set flag to prevent re-triggering
+
+              // Step 1: Blur gift boxes AND letter to invisible (1.5s)
+              $('.gift-box').removeClass('reappear').addClass('blur-out');
+              $('.letter-container').removeClass('reappear').addClass('blur-out');
+
+              // Step 2: Show and bloom all hearts (after 1.5s delay, runs for 4s)
+              setTimeout(function() {
+                  $('.heart-bloom-left, .heart-bloom-right, .heart-bloom-center').show().addClass('blooming');
+              }, 1500);
+
+              // Step 3: Hearts disappear (automatically at end of bloom animation)
+              // Step 4: Reappear gift boxes and letter (after hearts finish - 1.5s + 4s = 5.5s, then add 0.5s delay)
+              setTimeout(function() {
+                  $('.heart-bloom-left, .heart-bloom-right, .heart-bloom-center').removeClass('blooming').hide();
+
+                  // Close the envelope before reappearing
+                  envelope.removeClass("open").addClass("close");
+                  isOpen = false;
+                  currentPage = 1;
+                  $(".lyric-page").removeClass("active");
+                  $("#page" + currentPage).addClass("active");
+                  resetBtn.hide();
+                  openBtn.show();
+
+                  // Reappear gift boxes and letter
+                  $('.gift-box').removeClass('blur-out').addClass('reappear');
+                  $('.letter-container').removeClass('blur-out').addClass('reappear');
+
+                  // Remove reappear class after animation completes
+                  setTimeout(function() {
+                      $('.gift-box').removeClass('reappear');
+                      $('.letter-container').removeClass('reappear');
+                      isAnimating = false; // Reset flag after animation completes
+                  }, 1500);
+              }, 6000); // 1.5s blur + 4s hearts + 0.5s pause = 6s
           }
 
           // Background Music Control
